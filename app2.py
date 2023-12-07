@@ -1,23 +1,31 @@
 import streamlit as st
-num1 = st.number_input('Digite o primeiro número:')
-num2 = st.number_input('Digite o outro número: ')
+import random
 
-if st.button('somar'):
- res = num1 + num2
- st.text("resultado: ")
- st.title(res)
 
-if st.button('subtrair'):
-  sub = num1 - num2
-  st.text("resultado: ")
-  st.title(sub)
+st.title(' ------------ \n Par ou Ímpar \n ------------')
 
-if st.button('multiplicar'):
-   mult = num1 * num2
-   st.text("resultado: ")
-   st.title(mult)
+reiniciar = st.button("Reiniciar o Jogo")
 
-if st.button('dividir'):
-  div = num1 / num2
-  st.text("resultado: ")
-  st.title(div)
+while reiniciar:
+  
+  numero = st.number_input('Escolha um número de dedos', min_value = 0, max_value = 5, step = 1)
+  escolha = st.radio('Par ou Ímpar?', ['Par', 'Ímpar'])
+  
+  if st.button('Começar'):
+    num = random.randint(0, 5)
+    total = numero + num
+    result = 'Par' if total%2==0 else 'Ímpar'
+    vitoria = escolha.lower() == result.lower()
+  
+    st.write(f'Seu número: {numero}')
+    st.write(f'Número da CPU: {num}')
+    st.write(f'Total: {total}')
+    st.write(f'vitoria = {resultado}')
+  
+    if vitoria:
+      st.success('Parabéns - Você venceu.')
+    else:
+      st.error("Você perdeu...")
+      st.image("https://imgb.ifunny.co/images/aae9b8b5530bbae969d8b45c5c39433167904d3d009fc17f46aed93117c84de0_1.webp")
+  else:
+    break
